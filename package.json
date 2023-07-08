@@ -4,7 +4,9 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "format": "prettier --write \"resources/js/**/*.js\" \"resources/js/**/*.vue\""
+    "format": "prettier --write \"resources/js/**/*.js\" \"resources/js/**/*.vue\"",
+    "lint": "eslint resources/js/**/*.js resources/js/**/*.vue",
+    "lint:fix": "eslint resources/js/**/*.js resources/js/**/*.vue --fix"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.3.0",
