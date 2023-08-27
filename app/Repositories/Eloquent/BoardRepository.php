@@ -7,27 +7,26 @@ use App\Models\Board;
 
 class BoardRepository extends BaseRepository
 {
+  use HasDataTable;
 
-    use HasDataTable;
+  const MODEL_LABEL = 'Board';
 
-    const MODEL_LABEL = 'Board';
+  public function __construct(
+    Board $model
+  ) {
+    parent::__construct($model);
+  }
 
-    public function __construct(
-        Board $model
-    ) {
-        parent::__construct($model);
-    }
+  public function create($data)
+  {
+    $data['user_id'] = auth()->user()->id;
+    return parent::create($data);
+  }
 
-    public function create($data)
-    {
-        $data['user_id'] = auth()->user()->id;
-        return parent::create($data);
-    }
-
-    public function dataTable($data)
-    {
-        return $this->useDataTable($data, null, function ($query) {
-            $query->with('user')->where('user_id', auth()->user()->id);
-        });
-    }
+  public function dataTable($data)
+  {
+    return $this->useDataTable($data, null, function ($query) {
+      $query->with('user')->where('user_id', auth()->user()->id);
+    });
+  }
 }
